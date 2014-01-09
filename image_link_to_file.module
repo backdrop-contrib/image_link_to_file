@@ -115,7 +115,7 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
         '#theme' => 'image_formatter',
         '#item' => $item,
         '#image_style' => $settings['img_style'],
-        '#path' => $file_item ? array(
+        '#path' => isset($file_item) && $file_item ? array(
           'path' => $file_uri,
           'options' => array(
             'html' => TRUE,
