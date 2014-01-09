@@ -1,0 +1,6 @@
+name = Image link to file
+description = Formatter to link an image field to a file field in the same entity.
+package = Fields
+core = 7.x
+
+files[] = image_link_to_file.module
