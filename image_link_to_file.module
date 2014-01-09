@@ -43,8 +43,8 @@ function image_link_to_file_field_formatter_settings_summary($field, $instance, 
   if ($display['type'] == 'linktofile') {
     $summary = t('Image style: @style<br />Image linked to: @doc@newtab', array(
       '@style' => isset($settings['img_style']) ? $styles[$settings['img_style']] : '',
-      '@doc' => $file_field_label,
-      '@newtab' => $settings['new_tab'] ? ' (in a new win or tab)' : '',
+      '@doc' => $file_field_label ? $file_field_label : t('<nothing>'),
+      '@newtab' => $settings['new_tab'] ? t(' (in a new win or tab)') : '',
     ));
   }
 
@@ -74,14 +74,16 @@ function image_link_to_file_field_formatter_settings_form($field, $instance, $vi
       '#type' => 'select',
       '#options' => image_style_options(),
       '#default_value' => $settings['img_style'],
-      '#required' => TRUE,
+      '#empty_option' => t('None (original image)'),
+      '#required' => FALSE,
     );
     $element['img_link'] = array(
       '#title' => t('Image link'),
       '#type' => 'select',
       '#options' => $file_fields,
       '#default_value' => $settings['img_link'],
-      '#required' => TRUE,
+      '#empty_option' => t('No link'),
+      '#required' => FALSE,
     );
     $element['new_tab'] = array(
       '#title' => t('Open image in a new window or tab'),
@@ -100,9 +102,11 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
   $settings = $display['settings'];
 
   $file_field_name = $settings['img_link'];
-  $file_items = field_get_items($obj_type, $object, $file_field_name);
-  $file_item = $file_items[0];  // Select only the first field
-  $file_uri = file_create_url($file_item['uri']);
+  if ($file_field_name) {
+    $file_items = field_get_items($obj_type, $object, $file_field_name);
+    $file_item = $file_items[0];  // Select only the first field
+    $file_uri = file_create_url($file_item['uri']);
+  }
 
   $element = array();
   if ($display['type'] == 'linktofile') {
