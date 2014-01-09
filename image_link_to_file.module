@@ -9,7 +9,7 @@
  */
 function image_link_to_file_field_formatter_info() {
   return array(
-    'linktofile' => array(
+    'image_link_to_file' => array(
       'label' => t('Image linked to file'),
       'field types' => array('image'),
       'settings' => array(
@@ -40,7 +40,7 @@ function image_link_to_file_field_formatter_settings_summary($field, $instance, 
     $file_field_label = '';
   }
 
-  if ($display['type'] == 'linktofile') {
+  if ($display['type'] == 'image_link_to_file') {
     $summary = t('Image style: @style<br />Image linked to: @doc@newtab', array(
       '@style' => isset($settings['img_style']) ? $styles[$settings['img_style']] : '',
       '@doc' => $file_field_label ? $file_field_label : t('<nothing>'),
@@ -68,7 +68,7 @@ function image_link_to_file_field_formatter_settings_form($field, $instance, $vi
 
   $element = array();
 
-  if ($display['type'] == 'linktofile') {
+  if ($display['type'] == 'image_link_to_file') {
     $element['img_style'] = array(
       '#title' => t('Image style'),
       '#type' => 'select',
@@ -109,7 +109,7 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
   }
 
   $element = array();
-  if ($display['type'] == 'linktofile') {
+  if ($display['type'] == 'image_link_to_file') {
     foreach ($items as $delta => $item) {
       $element[$delta] = array(
         '#theme' => 'image_formatter',
