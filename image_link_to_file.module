@@ -146,9 +146,5 @@ function image_link_to_file_help($path, $arg) {
  * Implements hook_install().
  */
 function image_link_to_file_install() {
-  $t = get_t();
-  drupal_set_message($t("Use the Image link to file formatter for your content type at !link",
-    array('!link' => l(t('Administration > Structure > Content types > your_content_type'),
-          'admin/structure/types/manage/your_content_type/display'))
-  ));
+  // Nothing to do
 }
