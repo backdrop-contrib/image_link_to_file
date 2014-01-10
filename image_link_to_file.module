@@ -41,10 +41,10 @@ function image_link_to_file_field_formatter_settings_summary($field, $instance, 
   }
 
   if ($display['type'] == 'image_link_to_file') {
-    $summary = t('Image style: @style<br />Image linked to: @doc@newtab', array(
+    $summary = t('Image style: @style<br />Image linked to: @doc @newtab', array(
       '@style' => isset($settings['img_style']) ? $styles[$settings['img_style']] : '',
       '@doc' => $file_field_label ? $file_field_label : t('<nothing>'),
-      '@newtab' => $settings['new_tab'] ? t(' (in a new win or tab)') : '',
+      '@newtab' => $settings['new_tab'] ? t('(in a new win or tab)') : '',
     ));
   }
 
@@ -128,4 +128,27 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
     }
   }
   return $element;
+}
+
+
+/**
+ * Implements hook_help().
+ */
+function image_link_to_file_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#image_link_to_file':
+      // Return a line-break version of the module README.txt
+      return check_markup(file_get_contents( dirname(__FILE__) . "/README.txt"));
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function image_link_to_file_install() {
+  $t = get_t();
+  drupal_set_message($t("Use the Image link to file formatter for your content type at !link",
+    array('!link' => l(t('Administration > Structure > Content types > your_content_type'),
+          'admin/structure/types/manage/your_content_type/display'))
+  ));
 }
