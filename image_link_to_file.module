@@ -62,8 +62,9 @@ function image_link_to_file_field_formatter_settings_form($field, $instance, $vi
   $file_fields = array();
   foreach ($all_fields as $fld) {
     $fld_info = field_info_field($fld['field_name']);
-    if ($fld_info['type'] == 'file')
+    if ($fld_info['type'] == 'file') {
       $file_fields[$fld['field_name']] = $fld['label'];
+    }
   }
 
   $element = array();
