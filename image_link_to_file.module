@@ -60,7 +60,7 @@ function image_link_to_file_field_formatter_settings_form($field, $instance, $vi
 
   $all_fields = field_info_instances($instance['entity_type'], $instance['bundle']);
   $file_fields = array();
-  foreach ($all_fields as $delta => $fld) {
+  foreach ($all_fields as $fld) {
     $fld_info = field_info_field($fld['field_name']);
     if ($fld_info['type'] == 'file')
       $file_fields[$fld['field_name']] = $fld['label'];
@@ -104,7 +104,8 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
   $file_field_name = $settings['img_link'];
   if ($file_field_name) {
     $file_items = field_get_items($obj_type, $object, $file_field_name);
-    $file_item = $file_items[0];  // Select only the first field
+    // Select only the first field.
+    $file_item = $file_items[0];
     $file_uri = file_create_url($file_item['uri']);
   }
 
@@ -137,14 +138,7 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
 function image_link_to_file_help($path, $arg) {
   switch ($path) {
     case 'admin/help#image_link_to_file':
-      // Return a line-break version of the module README.txt
-      return check_markup(file_get_contents( dirname(__FILE__) . "/README.txt"));
+      // Return a line-break version of the module README.txt.
+      return check_markup(file_get_contents(dirname(__FILE__) . "/README.txt"));
   }
-}
-
-/**
- * Implements hook_install().
- */
-function image_link_to_file_install() {
-  // Nothing to do
 }
