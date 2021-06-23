@@ -1,8 +1,9 @@
 name = Image link to file
 description = Formatter to link an image field to a file field in the same entity.
 package = Fields
-core = 7.x
+backdrop = 1.x
+type = module
 
 dependencies[] = field
-test_dependencies[] = file
-test_dependencies[] = image
+dependencies[] = file
+dependencies[] = image

@@ -44,7 +44,7 @@ function image_link_to_file_field_formatter_settings_summary($field, $instance, 
     $summary = t('Image style: @style<br />Image linked to: @doc @newtab', array(
       '@style' => isset($settings['img_style']) ? $styles[$settings['img_style']] : '',
       '@doc' => $file_field_label ? $file_field_label : t('<nothing>'),
-      '@newtab' => $settings['new_tab'] ? t('(in a new win or tab)') : '',
+      '@newtab' => $settings['new_tab']?t('(in a new win or tab)') : '',
     ));
   }
 
@@ -117,7 +117,7 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
         '#theme' => 'image_formatter',
         '#item' => $item,
         '#image_style' => $settings['img_style'],
-        '#path' => isset($file_item) && $file_item ? array(
+        '#path' => isset($file_item) && $file_item?array(
           'path' => $file_uri,
           'options' => array(
             'html' => TRUE,
@@ -130,16 +130,4 @@ function image_link_to_file_field_formatter_view($obj_type, $object, $field, $in
     }
   }
   return $element;
-}
-
-
-/**
- * Implements hook_help().
- */
-function image_link_to_file_help($path, $arg) {
-  switch ($path) {
-    case 'admin/help#image_link_to_file':
-      // Return a line-break version of the module README.txt.
-      return check_markup(file_get_contents(dirname(__FILE__) . "/README.txt"));
-  }
 }
